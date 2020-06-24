@@ -19,7 +19,7 @@ module Mutations
         published: published,
         status: status,
         content: content)
-          { post: post }
+          return { post: post }
       else
         { errors: post.errors.full_messages}
       end
