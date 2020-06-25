@@ -8,8 +8,13 @@ module Types
     end
 
     field :posts, [Types::PostType], null: false,
-      description: "Return all posts in database"
-    def posts
+      description: "Return all posts in database",
+      null: true do
+        argument :user_id, ID, required: false
+      end
+
+    def posts(user_id:)
+      binding.pry
       Post.all.with_rich_text_content
     end
 

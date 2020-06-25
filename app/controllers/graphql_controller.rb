@@ -3,6 +3,8 @@ class GraphqlController < ApplicationController
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
   # protect_from_forgery with: :null_session
+ include GraphqlDevise::Concerns::SetUserByToken
+ before_action :authenticate_user!
 
   def execute
     variables = ensure_hash(params[:variables])
@@ -10,8 +12,9 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user,
     }
+
     result = GraphqlBlogApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
@@ -23,6 +26,7 @@ class GraphqlController < ApplicationController
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
+
     case ambiguous_param
     when String
       if ambiguous_param.present?

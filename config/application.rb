@@ -19,6 +19,8 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/json' }
+
 module GraphqlBlogApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -33,5 +35,17 @@ module GraphqlBlogApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource(
+          '*',
+          headers: :any,
+          expose: ["Authorization", 'access-token', 'expiry', 'token-type', 'uid', 'client'],
+          methods: [:get, :patch, :put, :delete, :post, :options, :show]
+        )
+      end
+   end
   end
 end

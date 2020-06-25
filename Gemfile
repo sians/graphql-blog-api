@@ -6,6 +6,10 @@ ruby '2.6.3'
 # use devise for user authentication
 gem 'devise'
 
+# use graphql_devise gem for authentication routes with graphql
+# gem 'graphql_devise'
+gem 'graphql_devise', path: "/Users/sianstone/code/sians/clones/graphql_devise/graphql_devise"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 # Use postgresql as the database for Active Record
@@ -26,7 +30,7 @@ gem 'puma', '~> 4.1'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
