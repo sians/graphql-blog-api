@@ -13,10 +13,12 @@ module Mutations
       type Types::PostType
 
       def resolve(**attributes)
-        # if context[:current_user].nil?
-        #   raise GraphQL::ExcecutionError,
-        #       "You need to authenticate to perform this action"
-        # end
+        # json = GraphqlBlogApiSchema.execute(params[:query], context: graphql_context(:user))
+
+        if context[:current_user].nil?
+          raise GraphQL::ExcecutionError,
+              "You need to authenticate to perform this action"
+        end
 
         post = Post.create!(attributes)
       end

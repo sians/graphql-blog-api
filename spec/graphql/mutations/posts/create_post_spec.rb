@@ -2,11 +2,12 @@ require 'rails_helper'
 
 module Mutations
   module Posts
-    TITLE = "New Title"
     RSpec.describe CreatePostMutation, type: :request do
       describe '.resolve' do
         it 'creates a post' do
+
           user = create(:user)
+          # login_as(user, scope: user)
 
           expect do
             post '/graphql', params: { query: query(user_id: user.id) }
