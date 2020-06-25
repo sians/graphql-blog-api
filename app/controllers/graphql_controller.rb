@@ -14,7 +14,7 @@ class GraphqlController < ApplicationController
       # Query context goes here, for example:
       current_user: current_user,
     }
-    # binding.pry
+
     result = GraphqlBlogApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
@@ -26,7 +26,7 @@ class GraphqlController < ApplicationController
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
-    # binding.pry
+
     case ambiguous_param
     when String
       if ambiguous_param.present?

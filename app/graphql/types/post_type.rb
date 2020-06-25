@@ -5,6 +5,7 @@ module Types
     field :published, GraphQL::Types::ISO8601DateTime, null: true
     field :status, Integer, null: true
     field :user, Types::UserType, null: false
+    field :user_id, ID, null: true
     field :content, String, null: true
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   end
